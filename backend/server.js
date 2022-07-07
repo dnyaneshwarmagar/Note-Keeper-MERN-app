@@ -3,9 +3,11 @@ const app = express();
 require("dotenv").config();
 const cors = require("cors");
 app.use(cors());
+app.use(express.json())
 const connectDB = require("./config/db")
 const PORT = process.env.PORT || 5000;
-
+const userControllers = require("./controllers/users.controller")
+app.use("/users",userControllers)
 app.get("/", (req, res) => {
     return res.send({data:"a"})
 })
