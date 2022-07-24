@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {registerUser}= require("../utils/users.utils")
+const {registerUser, authUser}= require("../utils/users.utils")
 router.get("/try",(req,res)=>{
     try{
         return res.send("into the users routes")
@@ -10,5 +10,6 @@ router.get("/try",(req,res)=>{
 })
 
 router.route("/register").post(registerUser);
+router.route("/login").post(authUser)
 
 module.exports = router

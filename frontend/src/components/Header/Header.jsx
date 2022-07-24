@@ -1,10 +1,23 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+
+import { Form, Button,Container,Nav,Navbar ,NavDropdown} from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../actions/userActions";
+import { useEffect } from "react";
 function Header() {
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    navigate("/")
+  };
+
+  useEffect(() => {}, [userInfo]);
   return (
     <Navbar bg="primary" expand="lg" variant="dark">
       <Container>
@@ -35,7 +48,9 @@ function Header() {
             <NavDropdown title="dnyneshm" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
+              <NavDropdown.Item 
+              onClick={logoutHandler}
+              >
                Logout
               </NavDropdown.Item>
             </NavDropdown>

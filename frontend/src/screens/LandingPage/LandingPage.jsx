@@ -1,19 +1,20 @@
 import React, { useEffect } from "react";
 import { Button, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "./LandingStyles.css";
 
 function LandingPage() {
-  // const userLogin = useSelector((state) => state.userLogin);
-  // const { userInfo } = userLogin;
+  const navigate = useNavigate()
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
 
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     history.push("/mynotes");
-  //   }
-  // }, [history, userInfo]);
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/mynotes");
+    }
+  }, [navigate, userInfo]);
   return (
     <div className="main">
       <Container>
@@ -24,12 +25,12 @@ function LandingPage() {
               <p className="subtitle">One Safe place for all your notes.</p>
             </div>
             <div className="buttonContainer">
-              {/* <Link to="/login"> */}
+              <Link to="/login">
                 <Button size="lg" className="landingbutton">
                   Login
                 </Button>
-              {/* </Link> */}
-              {/* <Link to="/register"> */}
+              </Link>
+              <Link to="/register">
                 <Button
                   variant="outline-primary"
                   size="lg"
@@ -37,7 +38,7 @@ function LandingPage() {
                 >
                   Signup
                 </Button>
-              {/* </Link> */}
+              </Link>
             </div>
           </div>
         </Row>
