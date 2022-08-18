@@ -19,11 +19,10 @@ function LoginPage() {
  const { loading, error, userInfo } = userLogin;
 
  useEffect(() => {
-  const userInfo = localStorage.getItem("userInfo")
 if (userInfo) {
   navigate("/mynotes");
 }
-}, [ ]);
+}, [userInfo ]);
 
  const submitHandler = (e) => {
    e.preventDefault();

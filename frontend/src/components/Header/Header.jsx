@@ -29,31 +29,43 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="m-auto">
-            <Form className="d-flex">
+            {userInfo && <Form className="d-flex">
               <Form.Control
                 type="search"
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
               />
-            </Form>
+            </Form>}
           </Nav>
           <Nav className="me-auto">
-            <Nav.Link href="#home">
-                <Link to="/mynotes">
-                My Notes
-                </Link>
-            </Nav.Link>
-            
-            <NavDropdown title="dnyneshm" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item 
-              onClick={logoutHandler}
-              >
-               Logout
-              </NavDropdown.Item>
-            </NavDropdown>
+          {userInfo ? (
+              <>
+                <Nav.Link href="/mynotes">My Notes</Nav.Link>
+                <NavDropdown
+                  title={`${userInfo.name}`}
+                  id="collasible-nav-dropdown"
+                >
+                  <NavDropdown.Item href="/profile">
+                    {/* <img
+                      alt=""
+                      src={`${userInfo.pic}`}
+                      width="25"
+                      height="25"
+                      style={{ marginRight: 10 }}
+                    /> */}
+                    My Profile
+                  </NavDropdown.Item>
+
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </>
+            ) : (
+              <Nav.Link href="/login">Login</Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

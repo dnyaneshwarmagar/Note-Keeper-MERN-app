@@ -8,14 +8,28 @@ const connectDB = require("./config/db")
 const PORT = process.env.PORT || 5000;
 const userControllers = require("./controllers/users.controller");
 const notesControllers = require("./controllers/notes.controller");
-
+const path = require("path")
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 app.use("/users",userControllers)
 app.use("/notes",notesControllers)
 
-app.get("/", (req, res) => {
-    return res.send({data:"a"})
+
+
+// deployment
+__dirname = path.resolve();
+if(process.env.NODE_ENV === 'production'){
+app.use(express.static(path.join(__dirname,'/frontend/dist')));
+app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname,"frontend","dist","index.html"))
 })
+}
+else{
+    app.get("/", (req, res) => {
+        return res.send({data:"API is running ..."})
+    })
+}
+
+
 app.use(notFound);
 app.use(errorHandler)
 

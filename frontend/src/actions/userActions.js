@@ -94,7 +94,7 @@ export const updateProfile = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post("/api/users/profile", user, config);
+    const { data } = await axios.post("http://localhost:5000/users/profile", user, config);
 
     dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
 

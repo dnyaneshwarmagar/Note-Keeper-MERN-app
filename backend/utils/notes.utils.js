@@ -2,7 +2,7 @@ const  Note = require("../models/notes.model");
 const asyncHandler = require("express-async-handler");
 
 // @desc    Get logged in user notes
-// @route   GET /api/notes
+// @route   GET /notes
 // @access  Private
 const getNotes = asyncHandler(async (req, res) => {
   const notes = await Note.find({ user: req.user._id });
@@ -10,7 +10,7 @@ const getNotes = asyncHandler(async (req, res) => {
 });
 
 //@description     Fetch single Note
-//@route           GET /api/notes/:id
+//@route           GET /notes/:id
 //@access          Public
 const getNoteById = asyncHandler(async (req, res) => {
   const note = await Note.findById(req.params.id);
@@ -25,7 +25,7 @@ const getNoteById = asyncHandler(async (req, res) => {
 });
 
 //@description     Create single Note
-//@route           GET /api/notes/create
+//@route           GET /notes/create
 //@access          Private
 const CreateNote = asyncHandler(async (req, res) => {
   const { title, content, category } = req.body;
@@ -44,7 +44,7 @@ const CreateNote = asyncHandler(async (req, res) => {
 });
 
 //@description     Delete single Note
-//@route           GET /api/notes/:id
+//@route           GET /notes/:id
 //@access          Private
 const DeleteNote = asyncHandler(async (req, res) => {
   const note = await Note.findById(req.params.id);
@@ -64,7 +64,7 @@ const DeleteNote = asyncHandler(async (req, res) => {
 });
 
 // @desc    Update a note
-// @route   PUT /api/notes/:id
+// @route   PUT /notes/:id
 // @access  Private
 const UpdateNote = asyncHandler(async (req, res) => {
   const { title, content, category } = req.body;
