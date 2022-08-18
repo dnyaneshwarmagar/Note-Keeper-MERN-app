@@ -1,9 +1,6 @@
 {
   "name": "note-keeper-mern-app",
   "version": "1.0.0",
-  "engines": {
-    "node": "6.14.2"
-  },
   "description": "",
   "main": "index.js",
   "scripts": {
